@@ -18,11 +18,12 @@ export default function Search() {
       <button
         className="rounded bg-red-600 px-9 py-2 text-white"
         onClick={() => {
-          if (location == "nothing") {
+          if (location == "") {
             return null;
           }
           // alert("ok")
-          router.push("/search");
+          router.push(`/search?city=${location}`);
+          setlocation("")
         }}
       >
         Let's go

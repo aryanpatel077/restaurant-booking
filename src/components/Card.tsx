@@ -10,7 +10,7 @@ interface props {
 export default function Card({restaurant}: props) {
   return (
     <div className="w-64 h-72 m-3 rounded overflow-hidden border cursor-pointer">
-      <Link href={'/restaurant/${restaurant.slug}'}>
+      <Link href={`/restaurant/${restaurant.slug}`}>
       <img
         src={restaurant.main_image}
         alt=""
