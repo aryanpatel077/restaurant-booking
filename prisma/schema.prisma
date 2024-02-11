@@ -29,7 +29,7 @@ model Restaurant {
   // tables      Table[]
   created_at  DateTime  @default(now())
   updated_at  DateTime  @updatedAt
-  // reviews     Review[]
+  reviews     Review[]
 }
 model Item {
   id            Int        @id @default(autoincrement())
@@ -58,30 +58,30 @@ model Region {
   updated_at  DateTime     @updatedAt
 }
 
-// model User {
-//   id         Int      @id @default(autoincrement())
-//   first_name String
-//   last_name  String
-//   city       String
-//   email      String   @unique
-//   password   String
-//   phone      String
-//   created_at DateTime @default(now())
-//   updated_at DateTime @updatedAt
-//   reviews    Review[]
-// }
+model User {
+  id         Int      @id @default(autoincrement())
+  first_name String
+  last_name  String
+  city       String
+  email      String   @unique
+  password   String
+  phone      String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  reviews    Review[]
+}
 
-// model Review {
-//   id            Int        @id @default(autoincrement())
-//   first_name    String
-//   last_name     String
-//   text          String
-//   rating        Float
-//   restaurant_id Int
-//   restaurant    Restaurant @relation(fields: [restaurant_id], references: [id])
-//   user_id       Int
-//   user          User       @relation(fields: [user_id], references: [id])
-// }
+model Review {
+  id            Int        @id @default(autoincrement())
+  first_name    String
+  last_name     String
+  text          String
+  rating        Float
+  restaurant_id Int
+  restaurant    Restaurant @relation(fields: [restaurant_id], references: [id])
+  user_id       Int
+  user          User       @relation(fields: [user_id], references: [id])
+}
 
 enum PRICE {
   CHEAP
