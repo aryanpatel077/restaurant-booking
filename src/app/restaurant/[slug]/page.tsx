@@ -5,7 +5,7 @@ import RestaurantDescription from "./components/RestaurantDescription";
 import RestaurantImages from "./components/RestaurantImages";
 import RestaurantReviewCard from "./components/RestaurantReviewCard";
 import RestaurantReservationCard from "./components/RestaurantReservationCard";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Review } from "@prisma/client";
 import RestaurantNavbar from "./components/RestaurantNavbar";
 
 const prisma = new PrismaClient();
@@ -21,7 +21,8 @@ interface RestaurantType {
   name: string;
   images: string[];
   description: string;
-  slug: string
+  slug: string;
+  reviews: Review[]
 }
 
 const fetchRestaurant = async (slug: string): Promise<RestaurantType> => {
@@ -34,7 +35,8 @@ const fetchRestaurant = async (slug: string): Promise<RestaurantType> => {
       name: true,
       description: true,
       images: true,
-      slug: true
+      slug: true,
+      reviews: true
     },
   });
 
@@ -56,15 +58,18 @@ export default async function page({ params }: Props) {
       <div className="bg-white w-[70%] rounded p-3 shadow">
         <RestaurantNavbar slug={restaurant.slug} />
         <RestaurantTitle title={restaurant.name} />
-        <RestaurantRating />
+        <RestaurantRating reviews={restaurant.reviews}/>
         <RestaurantDescription description={restaurant.description} />
         <RestaurantImages images={restaurant.images} />
         <div>
           <h1 className="font-bold text-3xl mt-10 mb-7 borber-b pb-5">
-            What 100 people are saying
+          What {restaurant.reviews.length}{" "}
+            {restaurant.reviews.length === 1 ? "person" : "people"} are saying
           </h1>
           <div>
-            <RestaurantReviewCard />
+            {restaurant.reviews.map((review) =>(
+              <RestaurantReviewCard  review={review} key={review.id}/>
+            ))}
           </div>
         </div>
       </div>
