@@ -1,4 +1,5 @@
 import RestaurantPrice from "@/components/Price";
+import Stars from "@/components/Stars";
 import calcuateReviewAvarage from "@/utils/calcuateReviewAvarage";
 import { Location, PRICE, Region, Review } from "@prisma/client";
 import Link from "next/link";
@@ -36,7 +37,7 @@ export default function SearchCard({restaurant}: {restaurant: restaurantProps}) 
       <div className="pl-5">
         <h2 className="text-3xl">{restaurant.name}</h2>
         <div className="flex items-start">
-          <div className="flex mb-2">*****</div>
+          <Stars reviews={restaurant.reviews}/>
           <p className="ml-2 text-sm">{renderReview()}</p>
         </div>
         <div className="mb-9">
