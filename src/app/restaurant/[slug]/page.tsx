@@ -1,4 +1,3 @@
-import React from "react";
 import RestaurantTitle from "./components/RestaurantTitle";
 import RestaurantRating from "./components/RestaurantRating";
 import RestaurantDescription from "./components/RestaurantDescription";
@@ -7,6 +6,7 @@ import RestaurantReviewCard from "./components/RestaurantReviewCard";
 import RestaurantReservationCard from "./components/RestaurantReservationCard";
 import { PrismaClient, Review } from "@prisma/client";
 import RestaurantNavbar from "./components/RestaurantNavbar";
+import { notFound } from "next/navigation";
 
 const prisma = new PrismaClient();
 
@@ -22,7 +22,7 @@ interface RestaurantType {
   images: string[];
   description: string;
   slug: string;
-  reviews: Review[]
+  reviews: Review[];
 }
 
 const fetchRestaurant = async (slug: string): Promise<RestaurantType> => {
@@ -36,39 +36,37 @@ const fetchRestaurant = async (slug: string): Promise<RestaurantType> => {
       description: true,
       images: true,
       slug: true,
-      reviews: true
+      reviews: true,
     },
   });
 
   if (!restaurant) {
-    throw new Error();
+    notFound();
   }
 
   return restaurant;
 };
 
 export default async function page({ params }: Props) {
-  // console.log(params.slug);
-
   const restaurant = await fetchRestaurant(params.slug);
-  console.log(restaurant);
+  // console.log(restaurant);
 
   return (
     <>
       <div className="bg-white w-[70%] rounded p-3 shadow">
         <RestaurantNavbar slug={restaurant.slug} />
         <RestaurantTitle title={restaurant.name} />
-        <RestaurantRating reviews={restaurant.reviews}/>
+        <RestaurantRating reviews={restaurant.reviews} />
         <RestaurantDescription description={restaurant.description} />
         <RestaurantImages images={restaurant.images} />
         <div>
           <h1 className="font-bold text-3xl mt-10 mb-7 borber-b pb-5">
-          What {restaurant.reviews.length}{" "}
+            What {restaurant.reviews.length}{" "}
             {restaurant.reviews.length === 1 ? "person" : "people"} are saying
           </h1>
           <div>
-            {restaurant.reviews.map((review) =>(
-              <RestaurantReviewCard  review={review} key={review.id}/>
+            {restaurant.reviews.map((review) => (
+              <RestaurantReviewCard review={review} key={review.id} />
             ))}
           </div>
         </div>

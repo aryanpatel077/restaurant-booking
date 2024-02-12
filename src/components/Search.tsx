@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
@@ -21,9 +21,8 @@ export default function Search() {
           if (location == "") {
             return null;
           }
-          // alert("ok")
           router.push(`/search?city=${location}`);
-          setlocation("")
+          setlocation("");
         }}
       >
         Let's go

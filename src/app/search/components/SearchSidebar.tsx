@@ -1,6 +1,5 @@
 import { Location, PRICE, Region } from "@prisma/client";
 import Link from "next/link";
-import React from "react";
 
 export default function SearchSidebar({
   locations,
@@ -11,24 +10,25 @@ export default function SearchSidebar({
   regions: Region[];
   searchParams: { city?: string; region?: string; price?: PRICE };
 }) {
-
-  const price =[
+  const price = [
     {
       price: PRICE.CHEAP,
       label: "$",
-      className: "border w-full text-reg text-center font-light rounded-l p-2"
+      className: "border w-full text-reg text-center font-light rounded-l p-2",
     },
     {
       price: PRICE.REGULAR,
       label: "$$",
-      className: "border-r border-t border-b w-full text-reg text-center font-light p-2"
+      className:
+        "border-r border-t border-b w-full text-reg text-center font-light p-2",
     },
     {
       price: PRICE.EXPENSIVE,
       label: "$$$",
-      className: "border-r border-t border-b w-full text-reg text-center font-light p-2 rounded-r"
-    }
-  ]
+      className:
+        "border-r border-t border-b w-full text-reg text-center font-light p-2 rounded-r",
+    },
+  ];
 
   return (
     <div className="w-1/5">
@@ -55,7 +55,7 @@ export default function SearchSidebar({
             <Link
               href={{
                 pathname: "/search",
-                query: {  ...searchParams, region: region.name },
+                query: { ...searchParams, region: region.name },
               }}
               className="font-light text-reg capitalize"
             >
@@ -67,17 +67,17 @@ export default function SearchSidebar({
       <div className="mt-3 pb-4">
         <h1 className="mb-2">Price</h1>
         <div className="flex">
-          {
-            price.map(({price,label,className}) =>(
-              <Link href={{
+          {price.map(({ price, label, className }) => (
+            <Link
+              href={{
                 pathname: "/search",
-                query: { ...searchParams, price},
-              } }
-              className={className} >
-               {label}
+                query: { ...searchParams, price },
+              }}
+              className={className}
+            >
+              {label}
             </Link>
-            ))
-          }
+          ))}
         </div>
       </div>
     </div>

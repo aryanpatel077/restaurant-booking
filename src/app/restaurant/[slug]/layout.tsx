@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import RestaurantHeader from "./components/RestaurantHeader";
 
 export const metadata = {
@@ -8,18 +7,17 @@ export const metadata = {
 
 export default function RestraurantLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
-  params: {slug: string}
+  params: { slug: string };
 }) {
   return (
     <>
-    <Navbar/>
-    <RestaurantHeader slug={params.slug} />
+      <RestaurantHeader slug={params.slug} />
       <div className="flex m-auto w-2/3 justify-between items-start 0 -mt-11">
         {children}
       </div>
     </>
-  )
-}    
+  );
+}

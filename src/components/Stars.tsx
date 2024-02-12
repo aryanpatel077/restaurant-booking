@@ -5,7 +5,7 @@ import halfStar from "../../public/icons/half-star.png";
 import Image from "next/image";
 import calcuateReviewAvarage from "@/utils/calcuateReviewAvarage";
 
-function Stars({ reviews, rating }: { reviews: Review[], rating?: number }) {
+function Stars({ reviews, rating }: { reviews: Review[]; rating?: number }) {
   const reviewRating = rating || calcuateReviewAvarage(reviews);
 
   const renderStar = () => {
@@ -22,16 +22,10 @@ function Stars({ reviews, rating }: { reviews: Review[], rating?: number }) {
 
     return stars.map((star) => (
       <Image src={star} alt="" className="w-4 h-4 mr-1" />
-    ))
+    ));
   };
 
-  return (
-    <div className="flex">
-      {renderStar()}
-    </div>
-  );
+  return <div className="flex">{renderStar()}</div>;
 }
 
 export default Stars;
-
-

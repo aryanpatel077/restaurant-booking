@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function RestaurantReservationCard() {
   return (
     <div className="w-[27%] relative text-reg">

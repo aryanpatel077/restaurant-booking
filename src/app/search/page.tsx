@@ -1,5 +1,3 @@
-import React from "react";
-import Navbar from "@/components/Navbar";
 import SearchHeader from "./components/SearchHeader";
 import SearchSidebar from "./components/SearchSidebar";
 import SearchCard from "./components/SearchCard";
@@ -56,7 +54,7 @@ const fetchRestaurant = (searchParams: searchParams) => {
     location: true,
     region: true,
     slug: true,
-    reviews: true
+    reviews: true,
   };
 
   return prisma.restaurant.findMany({
@@ -83,27 +81,24 @@ export default async function page({
   const regions = await fetchRegions();
 
   return (
-    <main className="bg-gray-100 min-h-screen w-screen">
-      <main className="max-w-screen-2xl m-auto bg-white">
-        <Navbar />
-        <SearchHeader />
-        <div className="flex py-4 m-auto w-2/3 justify-between items-start">
-          <SearchSidebar
-            locations={locations}
-            regions={regions}
-            searchParams={searchParams}
-          />
-          <div className="w-5/6">
-            {restaurants.length ? (
-              restaurants.map((restaurant) => (
-                <SearchCard restaurant={restaurant} />
-              ))
-            ) : (
-              <p>Sorry no restaurant found !!</p>
-            )}
-          </div>
+    <>
+      <SearchHeader />
+      <div className="flex py-4 m-auto w-2/3 justify-between items-start">
+        <SearchSidebar
+          locations={locations}
+          regions={regions}
+          searchParams={searchParams}
+        />
+        <div className="w-5/6">
+          {restaurants.length ? (
+            restaurants.map((restaurant) => (
+              <SearchCard restaurant={restaurant} />
+            ))
+          ) : (
+            <p>Sorry no restaurant found !!</p>
+          )}
         </div>
-      </main>
-    </main>
+      </div>
+    </>
   );
 }
