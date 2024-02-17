@@ -25,7 +25,11 @@ function Stars({ reviews, rating }: { reviews: Review[]; rating?: number }) {
     ));
   };
 
-  return <div className="flex">{renderStar()}</div>;
+  return(
+    <div className="flex">
+      {renderStar()}
+    </div>
+  );
 }
 
 export default Stars;
