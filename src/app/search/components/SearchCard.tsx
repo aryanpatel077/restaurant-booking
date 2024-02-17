@@ -1,5 +1,5 @@
-import RestaurantPrice from "@/components/Price";
-import Stars from "@/components/Stars";
+import RestaurantPrice from "@/app/components/Price";
+import Stars from "@/app/components/Stars";
 import calcuateReviewAvarage from "@/utils/calcuateReviewAvarage";
 import { Location, PRICE, Region, Review } from "@prisma/client";
 import Link from "next/link";

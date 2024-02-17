@@ -21,7 +21,6 @@ export default function Card({ restaurant }: props) {
               {restaurant.reviews.length === 1 ? "" : "s"}
             </p>
           </div>
-          <div className="flex mr-5">*****</div>
           <div className="flex text-reg font-light capitalize">
             <p className=" mr-3">{restaurant.region.name}</p>
             <RestaurantPrice price={restaurant.price} />
