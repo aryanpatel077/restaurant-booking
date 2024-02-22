@@ -23,6 +23,8 @@ interface RestaurantType {
   description: string;
   slug: string;
   reviews: Review[];
+  open_time: string;
+  close_time: string;
 }
 
 const fetchRestaurant = async (slug: string): Promise<RestaurantType> => {
@@ -37,6 +39,8 @@ const fetchRestaurant = async (slug: string): Promise<RestaurantType> => {
       images: true,
       slug: true,
       reviews: true,
+      open_time: true,
+      close_time: true,
     },
   });
 
@@ -71,7 +75,7 @@ export default async function page({ params }: Props) {
           </div>
         </div>
       </div>
-      <RestaurantReservationCard />
+      <RestaurantReservationCard openTime={restaurant.open_time} closeTime={restaurant.close_time}/>
     </>
   );
 }
